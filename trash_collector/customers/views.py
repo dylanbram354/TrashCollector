@@ -1,6 +1,6 @@
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+
 from django.urls import reverse_lazy
 from django.urls import reverse
 from .models import Customer
@@ -23,6 +23,7 @@ def index(request):
     except Customer.DoesNotExist:
         return HttpResponseRedirect(reverse('customers:create'))
 
+
 def create(request):
     user = request.user
     if request.method == 'POST':
@@ -42,3 +43,15 @@ def account_view(request):
     customer = Customer.objects.get(user=user)
     context = {'customer': customer}
     return render(request, 'customers/account_view.html', context)
+
+
+def change_pickup(request):
+    user = request.user 
+    customer = Customer.objects.get(user=user)
+    if request.method == "POST":
+        new_pickup_day = request.POST.get('pickup_day')
+        customer.pickup_day = new_pickup_day
+        customer.save()
+        return HttpResponseRedirect(reverse('customers:account_view'))    
+    else:
+        return render(request, 'customers/change_pickup.html')
