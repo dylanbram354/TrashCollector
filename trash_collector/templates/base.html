@@ -24,6 +24,15 @@
     <p>Customer Navbar</p>
 
     {% elif group.name == "Employees" %}
+    <nav class='navbar'>
+      <div>
+        <ul class="nav-link">
+          <li class="nav-link">
+            <a href="{% url 'employees:create' %} ">Create Profile</a>
+          </li>
+        </ul>
+     </div>
+   </nav>
     <p>Employee Navbar</p>
     {% endif %}
   {% endfor %}
