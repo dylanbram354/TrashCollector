@@ -1,0 +1,16 @@
+{% extends "base.html" %} 
+{% csrf_token %} 
+{% block content %}
+<div class="account-container">
+    <div class="jumbotron">
+        <form action="" method="post">
+            pickup_day = <input type='text' name='pickup_day' id='pickup_day' value="">
+            address = <input type='text' name='address' id='address' value="">
+            zip_code = <input type='text' name='zip_code' id='zip_code' value="">
+            balance = <input type='text' name='balance' id='balance' value="">
+            <input type="submit" value="Update Account">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

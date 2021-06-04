@@ -14,3 +14,8 @@ def index(request):
     # thereby finding the customer/employee profile that matches with the logged-in user.
     print(user)
     return render(request, 'customers/index.html')
+
+
+def account_info(request):
+   
+   return render(request, 'customers/account_info.html')
