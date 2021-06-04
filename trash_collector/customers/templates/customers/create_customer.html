@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="account-container">
+    <div class="jumbotron">
+        <form action="" method="post">
+            {% csrf_token %}
+            Name: <input type="text" name="name" id="name" value = "{{user.name}}"><br>
+            Weekly Pickup Day: <input type='text' name='pickup_day' id='pickup_day' value=""><br>
+            Address: <input type='text' name='address' id='address' value=""><br>
+            ZIP Code: <input type='text' name='zip_code' id='zip_code' value=""><br>
+            <input type="submit" value="Create Account">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

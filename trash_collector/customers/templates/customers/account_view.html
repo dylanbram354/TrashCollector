@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <p>Name: {{customer.name}}</p>
+    <p>Weekly Pickup: {{customer.pickup_day}}</p>
+    <p>Address: {{customer.address}}</p>
+    <p>ZIP code: {{customer.zip_code}}</p>
+    <p>Account Balance: {{customer.balance}}</p>
+    <p>One-time Pickup: {{customer.onetime_pickup}}</p>
+    <p>Suspension Start: {{customer.suspension_start}}</p>
+    <p>Suspension End: {{customer.suspension_end}}</p>
+</div>
+{% endblock %}

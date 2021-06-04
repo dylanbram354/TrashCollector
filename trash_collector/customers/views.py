@@ -1,6 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse_lazy
+from django.urls import reverse
 from .models import Customer
+
+
 # Create your views here.
 
 # TODO: Create a function for each path created in customers/urls.py. Each will need a template as well.
@@ -16,6 +21,24 @@ def index(request):
     return render(request, 'customers/index.html')
 
 
-def account_info(request):
-   
-   return render(request, 'customers/account_info.html')
+def create(request):
+    user = request.user
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        pickup_day = request.POST.get("pickup_day")
+        address = request.POST.get('address')
+        zip_code = request.POST.get('zip_code')
+        new_customer = Customer(name=name, pickup_day=pickup_day, user=user, zip_code=zip_code, address=address)
+        new_customer.save()
+        return HttpResponseRedirect(reverse('customers:index'))
+    else:
+        # customer = Customer.objects.get(user=user)
+        # context = {'user': customer}
+        return render(request, 'customers/create_customer.html')
+
+
+def account_view(request):
+    user = request.user
+    customer = Customer.objects.get(user=user)
+    context = {'customer': customer}
+    return render(request, 'customers/account_view.html', context)
