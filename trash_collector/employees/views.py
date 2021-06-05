@@ -14,7 +14,13 @@ from .models import Employee
 def index(request):
     # This line will get the Customer model from the other app, it can now be used to query the db
     Customer = apps.get_model('customers.Customer')
-    return render(request, 'employees/index.html')
+    user = request.user
+    try:
+        employee = Employee.objects.get(user=user)
+        return render(request, 'employees/index.html')
+    except Employee.DoesNotExist:
+        return HttpResponseRedirect(reverse('employees:create'))
+   
 
 def create(request):
 
