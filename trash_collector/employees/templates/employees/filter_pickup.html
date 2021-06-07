@@ -10,7 +10,7 @@
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
                 <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday>
+                <option value="Thursday">Thursday</option>
                 <option value="Friday">Friday</option>
                 <option value="Saturday">Saturday</option>
                 <option value="Sunday">Sunday</option>
@@ -24,6 +24,15 @@
         {% for customer in customers %}
         <div class="alert alert-secondary">
             <p><strong>{{customer.name}}</strong> {{customer.address}}</p>
+            <iframe
+              width="600"
+              height="450"
+              style="border:0"
+              loading="lazy"
+              allowfullscreen
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBzQ39COnqubzZ5K4mbsI1qwIwhmN-0Rf8
+                &q={{customer.address}}">
+            </iframe>
         </div>
         {% endfor %}
     </div>
