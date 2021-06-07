@@ -6,7 +6,8 @@
   {% if user.is_authenticated %}
     Hello Employee {{ user.username }}! Here are today's customers:
     {% for customer in customers %}
-    <p>{{customer.name}}</p>
+    <p>{{customer.name}}</p><br>
+   
     {% endfor %}
   {% else %}
     <p>You are at the employee index, but you are not logged in.</p>

@@ -5,20 +5,26 @@
     <div class="jumbotron">
         <form action="" method="post">
             {% csrf_token %}
-        
-            <label for='pickup_day'> Choose a new pickup day </label>
-            <select name="pickup_day" id='pickup_day'>
+            <label for='Weekdays'> Choose a day </label>
+            <select name="Weekday" id='Weekday'>
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
                 <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday</option>
+                <option value="Thursday">Thursday>
                 <option value="Friday">Friday</option>
                 <option value="Saturday">Saturday</option>
                 <option value="Sunday">Sunday</option>
-            </select><br>
-
-            <input type="submit" value="Change Pickup Day">
+            </select>
+            <input type="submit" value="See Pickups"> 
+            <!-- Weekly Pickup Day: <input type='text' name='pickup_day' id='pickup_day' value=""><br>
+            <input type="submit" value="Create Account"> -->
         </form>
+    </div>
+    <div>
+        {% for customer in customers %}
+        <p>{{customer.name}}</p><br>
+        <p>{{customer.pickup_day}}</p>
+        {% endfor %}
     </div>
 </div>
 

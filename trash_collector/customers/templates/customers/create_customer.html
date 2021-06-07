@@ -6,7 +6,16 @@
         <form action="" method="post">
             {% csrf_token %}
             Name: <input type="text" name="name" id="name" value = "{{user.name}}"><br>
-            Weekly Pickup Day: <input type='text' name='pickup_day' id='pickup_day' value=""><br>
+            <label for='pickup_day'> Choose a pickup day </label>
+            <select name="pickup_day" id='pickup_day'>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </select><br>
             Address: <input type='text' name='address' id='address' value=""><br>
             ZIP Code: <input type='text' name='zip_code' id='zip_code' value=""><br>
             <input type="submit" value="Create Account">

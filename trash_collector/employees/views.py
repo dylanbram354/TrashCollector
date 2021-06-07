@@ -1,3 +1,4 @@
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.apps import apps
@@ -48,3 +49,23 @@ def create(request):
         return HttpResponseRedirect(reverse('employees:index' ))
     else:
         return render(request, 'employees/create_employee.html')
+
+def filter_pickups(request):
+
+    user = request.user 
+    Customer = apps.get_model('customers.Customer')
+    if request.method == 'POST':
+        employee = Employee.objects.get(user=user)
+        zip_code = employee.zip_code
+        pickup_day = request.POST.get('Weekday')
+        customers = Customer.objects.filter(Q(zip_code=zip_code), Q(pickup_day=pickup_day))
+
+        context = {
+            'customers': customers
+        }
+        return render(request, 'employees/filter_pickup.html', context)
+    else:
+        return render(request, 'employees/filter_pickup.html')
+    
+
+    
