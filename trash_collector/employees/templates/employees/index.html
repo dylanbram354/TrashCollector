@@ -5,10 +5,14 @@
 {% block content %}
   {% if user.is_authenticated %}
     Hello Employee {{ user.username }}! Here are today's customers:
-    {% for customer in customers %}
-    <p>{{customer.name}}</p><br>
+    <ul>
+      {% for customer in customers %}
+      <li>{{customer.name}}<a class="button"
+                              href="{% url 'employees:confirm_pickup' customer.id %}">Confirm Pickup</a></li><br>
+      {% endfor %}
+    </ul>
    
-    {% endfor %}
+
   {% else %}
     <p>You are at the employee index, but you are not logged in.</p>
     <a href="{% url 'login' %}">Log In</a>

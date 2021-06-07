@@ -36,6 +36,18 @@ def index(request):
     except Employee.DoesNotExist:
         return HttpResponseRedirect(reverse('employees:create'))
 
+
+def confirm_pickup(request, customer_id):
+    user = request.user
+    Customer = apps.get_model('customers.Customer')
+    customer = Customer.objects.get(id=customer_id)
+    if customer.balance is not None:
+        customer.balance = customer.balance + 10
+    else:
+        customer.balance = 10
+    customer.save()
+    return HttpResponseRedirect(reverse('employees:index'))
+
    
 
 def create(request):
@@ -46,7 +58,7 @@ def create(request):
         zip_code = request.POST.get('zip_code')
         new_employee = Employee(name=name, zip_code=zip_code, user=user)
         new_employee.save()
-        return HttpResponseRedirect(reverse('employees:index' ))
+        return HttpResponseRedirect(reverse('employees:index'))
     else:
         return render(request, 'employees/create_employee.html')
 
