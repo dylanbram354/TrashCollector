@@ -22,7 +22,6 @@ def index(request):
         return render(request, 'customers/index.html')
     except Customer.DoesNotExist:
         return HttpResponseRedirect(reverse('customers:create'))
-        
 
 
 def create(request):
@@ -36,8 +35,6 @@ def create(request):
         new_customer.save()
         return HttpResponseRedirect(reverse('customers:index'))
     else:
-        # customer = Customer.objects.get(user=user)
-        # context = {'user': customer}
         return render(request, 'customers/create_customer.html')
 
 
