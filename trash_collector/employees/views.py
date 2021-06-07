@@ -1,10 +1,11 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.apps import apps
-
 from django.urls import reverse_lazy
 from django.urls import reverse
+from django.db.models import Q
 from .models import Employee
+from datetime import date
 
 # Create your views here.
 
@@ -17,9 +18,23 @@ def index(request):
     user = request.user
     try:
         employee = Employee.objects.get(user=user)
-        return render(request, 'employees/index.html')
+        zip_code = employee.zip_code
+        today_num = date.today().weekday()
+        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        today_day = days[today_num]
+        today_date = date.today()
+        customers = Customer.objects.filter(Q(zip_code=zip_code),
+                                            Q(pickup_day=today_day) | Q(onetime_pickup=today_date),
+                                            Q(suspension_start__gte=today_date) | Q(suspension_end__lte=today_date)
+                                            | Q(suspension_start=None) | Q(suspension_end=None)
+                                            )
+        context = {
+            'customers': customers
+        }
+        return render(request, 'employees/index.html', context)
     except Employee.DoesNotExist:
         return HttpResponseRedirect(reverse('employees:create'))
+
    
 
 def create(request):
