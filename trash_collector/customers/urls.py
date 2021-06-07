@@ -9,5 +9,6 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('create/', views.create, name='create'),
     path('account_view/', views.account_view, name='account_view'),
-    path('change_pickup/', views.change_pickup, name='change_pickup')
+    path('change_pickup/', views.change_pickup, name='change_pickup'),
+    path('add_pickup/', views.add_ontime_pickup, name='add_pickup')
 ]

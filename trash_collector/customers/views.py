@@ -58,3 +58,14 @@ def change_pickup(request):
         return HttpResponseRedirect(reverse('customers:account_view'))    
     else:
         return render(request, 'customers/change_pickup.html')
+
+def add_ontime_pickup(request):
+    user = request.user 
+    customer = Customer.objects.get(user=user)
+    if request.method == "POST":
+        ontime_pickup = request.POST.get('ontime_pickup')
+        customer.onetime_pickup = ontime_pickup
+        customer.save()
+        return HttpResponseRedirect(reverse('customers:account_view')) 
+    else: 
+        return render( request, 'customers/add_extra_pickup.html')
