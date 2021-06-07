@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="account-container">
-    <div class="jumbotron">
+    <div class="jumbotron" id="form-page">
         <form action="" method="post">
             {% csrf_token %}
             Name: <input type="text" name="name" id="name" value = "{{user.name}}"><br>

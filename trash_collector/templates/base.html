@@ -1,53 +1,78 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/static.css' %}">
   <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
 {% if user.is_authenticated %}
   {% for group in user.groups.all%}
     {% if group.name == "Customers" %}
-      <nav class='navbar'>
+      <nav class='navbar navbar-expand-sm  bg-dark navbar-dark'>
         <div>
-          <ul class="nav-link">
-            <li class="nav-link">
-              <a href="{% url 'customers:account_view' %} ">View Account Details</a>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="{% url 'customers:account_view' %}" class='btn btn-info'>View Account Details</a>
             </li>
-            <li class="nav-link">
-              <a href="{% url 'customers:change_pickup' %} ">Change Pickup day</a>
+            <li class="nav-item">
+              <a href="{% url 'customers:change_pickup' %} " class='btn btn-info'>Change Pickup day</a>
             </li>
-            <li class="nav-link">
-              <a href="{% url 'customers:add_pickup' %} ">Add Onetime Pickup</a>
+            <li class="nav-item">
+              <a href="{% url 'customers:add_pickup' %} " class='btn btn-info'>Add Onetime Pickup</a>
             </li>
-            <li class="nav-link">
-              <a href="{% url 'customers:suspension' %} ">Suspend Service</a>
+            <li class="nav-item">
+              <a href="{% url 'customers:suspension' %} " class='btn btn-info'>Suspend Service</a>
             </li>
           </ul>
        </div>
+       <div>
+         <ul class="navbar-nav">
+           <li class="nav-item">
+             <a href="{% url 'customers:index' %}" class='btn btn-outline-info' id='home-btn'>Home</a>
+           </li>
+           <li class="nav-item">
+            <a href="{% url 'logout' %}" class='btn btn-outline-info'>Log Out</a>
+          </li>
+         </ul>
+       </div>
      </nav>
-    <p>Customer Navbar</p>
 
     {% elif group.name == "Employees" %}
-    <nav class='navbar'>
+    <nav class='navbar navbar-expand-sm bg-dark navbar-dark'>
       <div>
-        <ul class="nav-link">
-          <li class="nav-link">
-            <a href="{% url 'employees:filter' %} ">Show Customer by pickup day</a>
+        <ul  class="navbar-nav">
+          <li class="nav-item">
+            <a href="{% url 'employees:filter' %} " class='btn btn-info'>Show Customer by pickup day</a>
           </li>
         </ul>
      </div>
+     <div>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="{% url 'employees:index' %}" class='btn btn-outline-info' id='home-btn'>Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'logout' %}" class='btn btn-outline-info'>Log Out</a>
+        </li>
+      </ul>
+    </div>
    </nav>
-    <p>Employee Navbar</p>
     {% endif %}
   {% endfor %}
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
+
 {% endif %}
-  <main>
-    <h1>{% block header %} {% endblock %}</h1>
-    {% block content %}
-    {% endblock %}
+
+  <main class="bg-dark">
+    <div class="container">
+      <h1>{% block header %} {% endblock %}</h1>
+      <div class="jumbotron ">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
   </main>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

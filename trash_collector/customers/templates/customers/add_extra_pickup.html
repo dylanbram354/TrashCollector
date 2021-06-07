@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="account-container">
-    <div class="jumbotron">
+    <div class="jumbotron" id="form-page">
         <form action="" method="post">
             {% csrf_token %}
             Extra Pickup Day: <input type='date' name='ontime_pickup' id='ontime_pickup' value=""><br>

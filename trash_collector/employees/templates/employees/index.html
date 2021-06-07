@@ -4,11 +4,14 @@
 
 {% block content %}
   {% if user.is_authenticated %}
-    Hello Employee {{ user.username }}! Here are today's customers:
+    <h3> Hello Employee {{ user.username }}! Here are today's customers:</h3>
     <ul>
       {% for customer in customers %}
-      <li>{{customer.name}}<a class="button"
-                              href="{% url 'employees:confirm_pickup' customer.id %}">Confirm Pickup</a></li><br>
+      <li class="alert alert-secondary">
+        <h4 >{{customer.name}}</h4> 
+        <p id="cust-address"> {{customer.address}} </p>
+        <a class="btn btn-secondary btn-sm" href="{% url 'employees:confirm_pickup' customer.id %}">Confirm Pickup</a>
+      </li>
       {% endfor %}
     </ul>
    

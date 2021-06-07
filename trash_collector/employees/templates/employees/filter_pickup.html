@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="account-container">
-    <div class="jumbotron">
+    <div class="jumbotron" id="form-page">
         <form action="" method="post">
             {% csrf_token %}
             <label for='Weekdays'> Choose a day </label>
@@ -14,7 +14,7 @@
                 <option value="Friday">Friday</option>
                 <option value="Saturday">Saturday</option>
                 <option value="Sunday">Sunday</option>
-            </select>
+            </select> <br>
             <input type="submit" value="See Pickups"> 
             <!-- Weekly Pickup Day: <input type='text' name='pickup_day' id='pickup_day' value=""><br>
             <input type="submit" value="Create Account"> -->
@@ -22,8 +22,9 @@
     </div>
     <div>
         {% for customer in customers %}
-        <p>{{customer.name}}</p><br>
-        <p>{{customer.pickup_day}}</p>
+        <div class="alert alert-secondary">
+            <p><strong>{{customer.name}}</strong> {{customer.address}}</p>
+        </div>
         {% endfor %}
     </div>
 </div>

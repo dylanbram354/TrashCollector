@@ -123,6 +123,8 @@ LOGIN_REDIRECT_URL = 'home'
 
 LOGOUT_REDIRECT_URL = 'home'
 
+
+
 try:
     from trash_collector.local_settings import *
 except ImportError:

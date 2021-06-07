@@ -2,11 +2,13 @@
 {% block content %}
 
 <div class="account-container">
-    <div class="jumbotron">
+    <div class="jumbotron" id="form-page">
         <form action="" method="post">
             {% csrf_token %}
-            Suspension Start: <input type='date' name='suspension_start' id='suspension_start' value=""><br>
-            Suspension Start: <input type='date' name='suspension_end' id='suspension_end' value=""><br>
+            <label for="suspension_start">Suspension Start:</label>
+            <input type='date' name='suspension_start' id='suspension_start' value="" required><br>
+            <label for="suspension_end">Suspension End:</label>
+            <input type='date' name='suspension_end' id='suspension_end' value="" required><br>
             <input type="submit" value="Confirm Suspension">
         </form>
     </div>

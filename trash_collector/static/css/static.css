@@ -1,0 +1,60 @@
+* { 
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #343a40;
+}
+
+main { 
+    min-height: 100vh;
+    margin: 0;
+}
+ 
+nav { 
+    margin: 0px; 
+    position: fixed;
+    min-height: 8vh;
+
+}
+
+li { 
+    padding-right: .5em;
+    list-style-type: none;
+}
+
+h1 { 
+    color:rgb(173, 173, 173);
+}
+
+
+h2 { 
+    color: rgb(39, 39, 39);
+}
+
+h3 { 
+    font-size: 1.2em;
+}
+
+h4 { 
+    font-size: 1em;
+    margin: 2vh 0 .5vh 0;
+}
+
+input{
+    margin: 5px 0px;
+}
+
+form { 
+    padding: 2px 0px;
+}
+
+.navbar { 
+    justify-content: space-between;
+}
+ 
+#form-page { 
+    justify-content: center;
+    text-align: center;
+}
+
