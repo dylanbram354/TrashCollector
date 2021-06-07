@@ -66,3 +66,17 @@ def add_ontime_pickup(request):
         return HttpResponseRedirect(reverse('customers:account_view')) 
     else: 
         return render( request, 'customers/add_extra_pickup.html')
+
+def add_suspension(request):
+    user = request.user 
+    customer = Customer.objects.get(user=user)
+    if request.method == "POST":
+        suspension_start = request.POST.get('suspension_start')
+        suspension_end = request.POST.get('suspension_end')
+        customer.suspension_start = suspension_start
+        customer.suspension_end = suspension_end
+        customer.save()
+        return HttpResponseRedirect(reverse('customers:account_view')) 
+    else: 
+        return render( request, 'customers/add_suspension.html')
+    

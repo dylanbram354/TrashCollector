@@ -5,7 +5,7 @@
     <div class="jumbotron">
         <form action="" method="post">
             {% csrf_token %}
-            Extra Pickup Day: <input type='text' name='ontime_pickup' id='ontime_pickup' value="YYYY-MM-DD"><br>
+            Extra Pickup Day: <input type='date' name='ontime_pickup' id='ontime_pickup' value=""><br>
             <input type="submit" value="Add Pickup">
         </form>
     </div>

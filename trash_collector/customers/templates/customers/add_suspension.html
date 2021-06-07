@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="account-container">
+    <div class="jumbotron">
+        <form action="" method="post">
+            {% csrf_token %}
+            Suspension Start: <input type='date' name='suspension_start' id='suspension_start' value=""><br>
+            Suspension Start: <input type='date' name='suspension_end' id='suspension_end' value=""><br>
+            <input type="submit" value="Confirm Suspension">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
