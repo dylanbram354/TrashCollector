@@ -24,11 +24,12 @@ def index(request):
         days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
         today_day = days[today_num]
         today_date = date.today()
-        customers = Customer.objects.filter(Q(zip_code=zip_code),
+        customers = Customer.objects.filter(Q(zip_code=zip_code), ~Q(last_completed_pickup=date.today()),
                                             Q(pickup_day=today_day) | Q(onetime_pickup=today_date),
                                             Q(suspension_start__gte=today_date) | Q(suspension_end__lte=today_date)
-                                            | Q(suspension_start=None) | Q(suspension_end=None)
+                                            | Q(suspension_start=None) | Q(suspension_end=None),
                                             )
+
         context = {
             'customers': customers
         }
@@ -43,6 +44,7 @@ def confirm_pickup(request, customer_id):
     customer = Customer.objects.get(id=customer_id)
     if customer.balance is not None:
         customer.balance = customer.balance + 10
+        customer.last_completed_pickup = date.today()
     else:
         customer.balance = 10
     customer.save()
