@@ -10,15 +10,6 @@
       <li class="alert alert-secondary">
         <h4 >{{customer.name}}</h4> 
         <p id="cust-address"> {{customer.address}} </p>
-        <iframe
-              width="600"
-              height="450"
-              style="border:0"
-              loading="lazy"
-              allowfullscreen
-              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBzQ39COnqubzZ5K4mbsI1qwIwhmN-0Rf8
-                &q={{customer.address}}">
-            </iframe><br>
         <a class="btn btn-secondary btn-sm" href="{% url 'employees:confirm_pickup' customer.id %}">Confirm Pickup</a>
       </li>
       {% endfor %}
@@ -32,6 +23,20 @@
               {% for customer in customers %}|{{customer.address}}{% endfor %}&key=AIzaSyBzQ39COnqubzZ5K4mbsI1qwIwhmN-0Rf8">
             </iframe>
     </ul>
+    <div>
+      <iframe
+        width="600"
+        height="450"
+        style="border:0"
+        loading="lazy"
+        allowfullscreen
+        src="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap
+        &markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318
+        &markers=color:red%7Clabel:C%7C40.718217,-73.998284
+        &key=AIzaSyCakOk3SQCoQ6Z9g-ne5jPfTKLXhGbdFW4"
+        >
+</iframe><br>
+    </div>
    
 
   {% else %}

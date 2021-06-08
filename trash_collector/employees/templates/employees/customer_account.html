@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="account-container">
+    <div class="jumbotron" id="form-page">
+        <p>Name: {{customer.name}}</p>
+        <p>Weekly Pickup: {{customer.pickup_day}}</p>
+        <p>Address: {{customer.address}}</p>
+        <p>ZIP code: {{customer.zip_code}}</p>
+        <p>Account Balance: {{customer.balance}}</p>
+        <p>One-time Pickup: {{customer.onetime_pickup}}</p>
+        <p>Suspension Start: {{customer.suspension_start}}</p>
+        <p>Suspension End: {{customer.suspension_end}}</p>
+    </div>
+    <div>
+        <div class="alert alert-secondary">
+            <p><strong>{{customer.name}}</strong> {{customer.address}}</p>
+            <iframe
+                width="600"
+                height="450"
+                style="border:0"
+                loading="lazy"
+                allowfullscreen
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCakOk3SQCoQ6Z9g-ne5jPfTKLXhGbdFW4
+                    &q={{customer.address}}">
+            </iframe>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
