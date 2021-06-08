@@ -11,5 +11,7 @@ urlpatterns = [
     path('account_view/', views.account_view, name='account_view'),
     path('change_pickup/', views.change_pickup, name='change_pickup'),
     path('add_pickup/', views.add_ontime_pickup, name='add_pickup'),
-    path('suspension/', views.add_suspension, name='suspension')
+    path('suspension/', views.add_suspension, name='suspension'),
+    path('pay_bill', views.pay_bill, name='pay_bill'),
+    path('submit_payment', views.submit_payment, name="submit_payment")
 ]

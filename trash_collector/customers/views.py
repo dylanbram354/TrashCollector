@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.urls import reverse
 from .models import Customer
-
+import stripe
 
 # Create your views here.
 
@@ -79,4 +79,34 @@ def add_suspension(request):
         return HttpResponseRedirect(reverse('customers:account_view')) 
     else: 
         return render( request, 'customers/add_suspension.html')
+
+def pay_bill(request):
+    user = request.user 
+    customer = Customer.objects.get(user=user)
+
+    context = {
+        'customer': customer
+    }
+
+    return render(request, 'customers/pay_bill.html', context)
+
+def submit_payment(request):
+    user = request.user
+    customer = Customer.objects.get(user=user)
     
+    stripe.api_key = 'sk_test_51J09k7IegiEVwxhXjGVmOxHgTFqdKvLd18n3vnSTs13X8pv5AOy0QEvKyOGVsfDjiDad3OOIbu1lkm5pf3mfGHHI00shdRRtYE'
+
+    stripe.PaymentIntent.create(
+        amount=1000,
+        currency='usd',
+        payment_method_types=['card'],
+        receipt_email='jboothwebdev@gmail.com'
+    )
+
+    context = {
+        'customer': customer
+    }
+
+    customer.balance -= 10 
+    customer.save()
+    return render(request, 'customers/account_view.html', context)
