@@ -21,24 +21,8 @@
               allowfullscreen
               src="https://www.google.com/maps/api/staticmap?&size=400x400&markers=color:blue
               {% for customer in customers %}|{{customer.address}}{% endfor %}&key=AIzaSyBzQ39COnqubzZ5K4mbsI1qwIwhmN-0Rf8">
-            </iframe>
+      </iframe>
     </ul>
-    <div>
-      <iframe
-        width="600"
-        height="450"
-        style="border:0"
-        loading="lazy"
-        allowfullscreen
-        src="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap
-        &markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318
-        &markers=color:red%7Clabel:C%7C40.718217,-73.998284
-        &key=AIzaSyCakOk3SQCoQ6Z9g-ne5jPfTKLXhGbdFW4"
-        >
-</iframe><br>
-    </div>
-   
-
   {% else %}
     <p>You are at the employee index, but you are not logged in.</p>
     <a href="{% url 'login' %}">Log In</a>
