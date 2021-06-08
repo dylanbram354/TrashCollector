@@ -10,7 +10,8 @@
       <li class="alert alert-secondary">
         <h4 >{{customer.name}}</h4> 
         <p id="cust-address{{customer.id}}"> {{customer.address}} </p>
-        <a class="btn btn-secondary btn-sm" href="{% url 'employees:confirm_pickup' customer.id %}">Confirm Pickup</a>
+        <a class="btn btn-secondary btn-sm"
+           href="{% url 'employees:confirm_pickup' customer.id %}">Confirm Pickup</a>
       </li>
       {% endfor %}
     </ul>
