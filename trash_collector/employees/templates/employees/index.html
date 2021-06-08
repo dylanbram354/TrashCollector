@@ -22,6 +22,15 @@
         <a class="btn btn-secondary btn-sm" href="{% url 'employees:confirm_pickup' customer.id %}">Confirm Pickup</a>
       </li>
       {% endfor %}
+      <iframe
+              width="600"
+              height="450"
+              style="border:0"
+              loading="lazy"
+              allowfullscreen
+              src="https://www.google.com/maps/api/staticmap?&size=400x400&markers=color:blue
+              {% for customer in customers %}|{{customer.address}}{% endfor %}&key=AIzaSyBzQ39COnqubzZ5K4mbsI1qwIwhmN-0Rf8">
+            </iframe>
     </ul>
    
 
