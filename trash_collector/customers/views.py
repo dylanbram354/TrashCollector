@@ -93,7 +93,10 @@ def pay_bill(request):
 def submit_payment(request):
     user = request.user
     customer = Customer.objects.get(user=user)
-    
+    context = {
+            'customer': customer
+        }
+
     stripe.api_key = 'sk_test_51J09k7IegiEVwxhXjGVmOxHgTFqdKvLd18n3vnSTs13X8pv5AOy0QEvKyOGVsfDjiDad3OOIbu1lkm5pf3mfGHHI00shdRRtYE'
 
     stripe.PaymentIntent.create(
@@ -103,10 +106,7 @@ def submit_payment(request):
         receipt_email='jboothwebdev@gmail.com'
     )
 
-    context = {
-        'customer': customer
-    }
-
     customer.balance -= 10 
     customer.save()
     return render(request, 'customers/account_view.html', context)
+    
