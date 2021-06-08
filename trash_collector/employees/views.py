@@ -80,4 +80,21 @@ def filter_pickups(request):
         return render(request, 'employees/filter_pickup.html')
     
 
-    
+def get_customers(request):
+    Customer = apps.get_model('customers.Customer')
+    customers = Customer.objects.all()
+    context = {
+            'customers': customers
+        }
+
+    return render(request, 'employees/customer_list.html', context)
+
+
+def get_customers_detail(request, customer_id):
+    Customer = apps.get_model('customers.Customer')
+    customer = Customer.objects.get(id=customer_id)
+    context = {
+        'customer' : customer
+    }
+
+    return render(request, 'employees/customer_account.html', context)
