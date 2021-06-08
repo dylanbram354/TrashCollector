@@ -3,6 +3,9 @@
 
 
     <p>Account Balance: {{customer.balance}}</p>
-    <a href="{% url 'customers:submit_payment' %}" class="btn btn-success">Submit Payment</a>
-
+    {% if customer.balance != None or customer.balance >= 10 %}
+        <a href="{% url 'customers:submit_payment' %}" class="btn btn-success">Submit Payment</a>
+    {% else %}
+        <p> No Balance or Balance is not high enough for a payment. </p>
+    {% endif %}
 {% endblock %}
