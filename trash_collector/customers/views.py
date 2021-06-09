@@ -12,7 +12,7 @@ import stripe
 
 
 def index(request):
-    if request.user.is_anonymous:
+    if not request.user.groups.filter(name="Customers").exists():
         return render(request, 'home.html')
     user = request.user
     try:
@@ -23,7 +23,7 @@ def index(request):
 
 
 def create(request):
-    if request.user.is_anonymous:
+    if not request.user.groups.filter(name="Customers").exists():
         return render(request, 'home.html')
     user = request.user
     if request.method == 'POST':
@@ -39,7 +39,7 @@ def create(request):
 
 
 def account_view(request):
-    if request.user.is_anonymous:
+    if not request.user.groups.filter(name="Customers").exists():
         return render(request, 'home.html')
     user = request.user
     customer = Customer.objects.get(user=user)
@@ -48,7 +48,7 @@ def account_view(request):
 
 
 def change_pickup(request):
-    if request.user.is_anonymous:
+    if not request.user.groups.filter(name="Customers").exists():
         return render(request, 'home.html')
     user = request.user 
     customer = Customer.objects.get(user=user)
@@ -61,7 +61,7 @@ def change_pickup(request):
         return render(request, 'customers/change_pickup.html')
 
 def add_ontime_pickup(request):
-    if request.user.is_anonymous:
+    if not request.user.groups.filter(name="Customers").exists():
         return render(request, 'home.html')
     user = request.user 
     customer = Customer.objects.get(user=user)
@@ -74,7 +74,7 @@ def add_ontime_pickup(request):
         return render( request, 'customers/add_extra_pickup.html')
 
 def add_suspension(request):
-    if request.user.is_anonymous:
+    if not request.user.groups.filter(name="Customers").exists():
         return render(request, 'home.html')
     user = request.user 
     customer = Customer.objects.get(user=user)
@@ -90,7 +90,7 @@ def add_suspension(request):
 
 
 def pay_bill(request):
-    if request.user.is_anonymous:
+    if not request.user.groups.filter(name="Customers").exists():
         return render(request, 'home.html')
     user = request.user 
     customer = Customer.objects.get(user=user)
@@ -103,7 +103,7 @@ def pay_bill(request):
 
 
 def submit_payment(request):
-    if request.user.is_anonymous:
+    if not request.user.groups.filter(name="Customers").exists():
         return render(request, 'home.html')
     user = request.user
     customer = Customer.objects.get(user=user)

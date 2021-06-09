@@ -14,7 +14,7 @@ from datetime import date
 
 
 def index(request):
-    if request.user.is_anonymous:
+    if not request.user.groups.filter(name="Employees").exists():
         return render(request, 'home.html')
     Customer = apps.get_model('customers.Customer')
     user = request.user
@@ -40,7 +40,7 @@ def index(request):
 
 
 def confirm_pickup(request, customer_id):
-    if request.user.is_anonymous:
+    if not request.user.groups.filter(name="Employees").exists():
         return render(request, 'home.html')
     user = request.user
     Customer = apps.get_model('customers.Customer')
@@ -56,7 +56,7 @@ def confirm_pickup(request, customer_id):
    
 
 def create(request):
-    if request.user.is_anonymous:
+    if not request.user.groups.filter(name="Employees").exists():
         return render(request, 'home.html')
     user = request.user 
     if request.method == 'POST':
@@ -69,7 +69,7 @@ def create(request):
         return render(request, 'employees/create_employee.html')
 
 def filter_pickups(request):
-    if request.user.is_anonymous:
+    if not request.user.groups.filter(name="Employees").exists():
         return render(request, 'home.html')
     user = request.user 
     Customer = apps.get_model('customers.Customer')
@@ -88,7 +88,7 @@ def filter_pickups(request):
     
 
 def get_customers(request):
-    if request.user.is_anonymous:
+    if not request.user.groups.filter(name="Employees").exists():
         return render(request, 'home.html')
     Customer = apps.get_model('customers.Customer')
     customers = Customer.objects.all()
@@ -100,7 +100,7 @@ def get_customers(request):
 
 
 def get_customers_detail(request, customer_id):
-    if request.user.is_anonymous:
+    if not request.user.groups.filter(name="Employees").exists():
         return render(request, 'home.html')
     Customer = apps.get_model('customers.Customer')
     customer = Customer.objects.get(id=customer_id)
