@@ -15,7 +15,9 @@
       </li>
       {% endfor %}
     </ul>
-    <div id="map" style="height:50vh"></div>
+    {% if customers %}
+      <div id="map" style="height:50vh"></div>
+    {% endif %}
     <script>
     let map;
     function initMap() {

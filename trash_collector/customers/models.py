@@ -15,5 +15,5 @@ class Customer(models.Model):
     onetime_pickup = models.DateField(null=True)
     suspension_start = models.DateField(null=True)
     suspension_end = models.DateField(null=True)
-    last_completed_pickup = models.DateField(null=True)
+    last_completed_pickup =models.DateField(null=True)
 

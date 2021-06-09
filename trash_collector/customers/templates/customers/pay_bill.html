@@ -1,11 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 
-
+    <div class="jumbotron" id="form-page">
     <p>Account Balance: {{customer.balance}}</p>
     {% if customer.balance != None or customer.balance >= 10 %}
-        <a href="{% url 'customers:submit_payment' %}" class="btn btn-success">Submit Payment</a>
+        <form action="" method='POST'>
+            {% csrf_token %}
+            Card Number: <input type='number' name='cardnumber' id="cardnumber"><br>
+            Payment Amount: <input type="number" name='payment_amount' id='payment_amount'><br>
+                            <input type='submit' value='Submit Payment'>
+        {% comment %} <a href="{% url 'customers:submit_payment' %}" class="btn btn-success">Submit Payment</a> {% endcomment %}
     {% else %}
         <p> No Balance or Balance is not high enough for a payment. </p>
     {% endif %}
+    </div>
 {% endblock %}

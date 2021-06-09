@@ -44,9 +44,9 @@ def confirm_pickup(request, customer_id):
     customer = Customer.objects.get(id=customer_id)
     if customer.balance is not None:
         customer.balance = customer.balance + 10
-        customer.last_completed_pickup = date.today()
     else:
         customer.balance = 10
+    customer.last_completed_pickup = date.today()
     customer.save()
     return HttpResponseRedirect(reverse('employees:index'))
 

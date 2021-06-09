@@ -93,20 +93,27 @@ def pay_bill(request):
 def submit_payment(request):
     user = request.user
     customer = Customer.objects.get(user=user)
-    context = {
-            'customer': customer
-        }
+    if request.method == "POST":
+        payment_amount = request.POST.get('payment_amount')
+        total_payment =   int(payment_amount) * 100
 
-    stripe.api_key = 'sk_test_51J09k7IegiEVwxhXjGVmOxHgTFqdKvLd18n3vnSTs13X8pv5AOy0QEvKyOGVsfDjiDad3OOIbu1lkm5pf3mfGHHI00shdRRtYE'
 
-    stripe.PaymentIntent.create(
-        amount=1000,
-        currency='usd',
-        payment_method_types=['card'],
-        receipt_email='jboothwebdev@gmail.com'
-    )
 
-    customer.balance -= 10 
-    customer.save()
-    return render(request, 'customers/account_view.html', context)
+        stripe.api_key = 'sk_test_51J09k7IegiEVwxhXjGVmOxHgTFqdKvLd18n3vnSTs13X8pv5AOy0QEvKyOGVsfDjiDad3OOIbu1lkm5pf3mfGHHI00shdRRtYE'
+
+        stripe.PaymentIntent.create(
+            amount=total_payment,
+            currency='usd',
+            payment_method_types=['card'],
+            receipt_email='jboothwebdev@gmail.com'
+        )
+
+        customer.balance -= total_payment / 100
+        customer.save()
+        return HttpResponseRedirect(reverse('customers:account_view'))
+    else:
+        context = {
+                'customer': customer
+            }
+        return render(request, 'customers/pay_bill.html', context)
     
