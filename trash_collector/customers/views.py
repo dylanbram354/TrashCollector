@@ -12,11 +12,9 @@ import stripe
 
 
 def index(request):
-    # The following line will get the logged-in in user (if there is one) within any view function
+    if request.user.is_anonymous:
+        return render(request, 'home.html')
     user = request.user
-    # It will be necessary while creating a customer/employee to assign the logged-in user as the user foreign key
-    # This will allow you to later query the database using the logged-in user,
-    # thereby finding the customer/employee profile that matches with the logged-in user.
     try:
         customer = Customer.objects.get(user=user)
         return render(request, 'customers/index.html')
@@ -25,6 +23,8 @@ def index(request):
 
 
 def create(request):
+    if request.user.is_anonymous:
+        return render(request, 'home.html')
     user = request.user
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -39,6 +39,8 @@ def create(request):
 
 
 def account_view(request):
+    if request.user.is_anonymous:
+        return render(request, 'home.html')
     user = request.user
     customer = Customer.objects.get(user=user)
     context = {'customer': customer}
@@ -46,6 +48,8 @@ def account_view(request):
 
 
 def change_pickup(request):
+    if request.user.is_anonymous:
+        return render(request, 'home.html')
     user = request.user 
     customer = Customer.objects.get(user=user)
     if request.method == "POST":
@@ -57,6 +61,8 @@ def change_pickup(request):
         return render(request, 'customers/change_pickup.html')
 
 def add_ontime_pickup(request):
+    if request.user.is_anonymous:
+        return render(request, 'home.html')
     user = request.user 
     customer = Customer.objects.get(user=user)
     if request.method == "POST":
@@ -68,6 +74,8 @@ def add_ontime_pickup(request):
         return render( request, 'customers/add_extra_pickup.html')
 
 def add_suspension(request):
+    if request.user.is_anonymous:
+        return render(request, 'home.html')
     user = request.user 
     customer = Customer.objects.get(user=user)
     if request.method == "POST":
@@ -80,7 +88,10 @@ def add_suspension(request):
     else: 
         return render( request, 'customers/add_suspension.html')
 
+
 def pay_bill(request):
+    if request.user.is_anonymous:
+        return render(request, 'home.html')
     user = request.user 
     customer = Customer.objects.get(user=user)
 
@@ -90,7 +101,10 @@ def pay_bill(request):
 
     return render(request, 'customers/pay_bill.html', context)
 
+
 def submit_payment(request):
+    if request.user.is_anonymous:
+        return render(request, 'home.html')
     user = request.user
     customer = Customer.objects.get(user=user)
     if request.method == "POST":
@@ -116,4 +130,3 @@ def submit_payment(request):
                 'customer': customer
             }
         return render(request, 'customers/pay_bill.html', context)
-    

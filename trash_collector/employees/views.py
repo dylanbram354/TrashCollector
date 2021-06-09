@@ -14,7 +14,8 @@ from datetime import date
 
 
 def index(request):
-    # This line will get the Customer model from the other app, it can now be used to query the db
+    if request.user.is_anonymous:
+        return render(request, 'home.html')
     Customer = apps.get_model('customers.Customer')
     user = request.user
     try:
@@ -39,6 +40,8 @@ def index(request):
 
 
 def confirm_pickup(request, customer_id):
+    if request.user.is_anonymous:
+        return render(request, 'home.html')
     user = request.user
     Customer = apps.get_model('customers.Customer')
     customer = Customer.objects.get(id=customer_id)
@@ -53,7 +56,8 @@ def confirm_pickup(request, customer_id):
    
 
 def create(request):
-
+    if request.user.is_anonymous:
+        return render(request, 'home.html')
     user = request.user 
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -65,7 +69,8 @@ def create(request):
         return render(request, 'employees/create_employee.html')
 
 def filter_pickups(request):
-
+    if request.user.is_anonymous:
+        return render(request, 'home.html')
     user = request.user 
     Customer = apps.get_model('customers.Customer')
     if request.method == 'POST':
@@ -83,6 +88,8 @@ def filter_pickups(request):
     
 
 def get_customers(request):
+    if request.user.is_anonymous:
+        return render(request, 'home.html')
     Customer = apps.get_model('customers.Customer')
     customers = Customer.objects.all()
     context = {
@@ -93,6 +100,8 @@ def get_customers(request):
 
 
 def get_customers_detail(request, customer_id):
+    if request.user.is_anonymous:
+        return render(request, 'home.html')
     Customer = apps.get_model('customers.Customer')
     customer = Customer.objects.get(id=customer_id)
     context = {
